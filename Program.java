@@ -1,10 +1,7 @@
 package searchalgorithms;
 
 import java.util.Arrays;
-
-import searchalgorithms.LinearSearchInt;
-import searchalgorithms.ParallelSumInt;
-
+import searchclasses.*;
 //main program file
 
 public class Program {
