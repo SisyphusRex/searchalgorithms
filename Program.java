@@ -8,12 +8,13 @@ public class Program {
     // put main program here
     private int[] int_array = { 43, 12, 65, 23, 24, 8, 2, 3, 4, 1 };
     private int[] int_array2 = { 35, 5, 16, 77, 97, 95, 40, 20, 6, 11 };
+    private Integer[] integerArray = { 45, 88, 4, 2, 34, 8, 77, 99, 98, 101, 66 };
 
     public void run() {
         BubbleSort my_BubbleSort = new BubbleSort();
-        int[] sorted_array = my_BubbleSort.bubble_sort(int_array);
+        my_BubbleSort.bubble_sort(int_array);
         System.out.println("BubbleSorted:");
-        System.out.println(Arrays.toString(sorted_array));
+        System.out.println(Arrays.toString(int_array));
         System.out.println();
 
         LinearSearch my_LinearSearch = new LinearSearch();
@@ -39,6 +40,11 @@ public class Program {
             System.out.println(String.format("Index: %d", index));
             System.out.println();
         }
+
+        Merge.mergeSort(integerArray);
+        System.out.println("MergeSorted: ");
+        System.out.println(Arrays.toString(integerArray));
+        System.out.println();
 
     }
 }
