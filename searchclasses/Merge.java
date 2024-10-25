@@ -9,12 +9,23 @@ public class Merge {
     private Merge() {
     }
 
-    public static void mergeSort(Comparable[] inputArray) {
-        Comparable[] auxillaryArray = new Comparable[inputArray.length];
+    public static void sort(Integer[] inputArray) {
+        Integer[] auxillaryArray = new Integer[inputArray.length];
         sort(inputArray, auxillaryArray, 0, inputArray.length - 1);
+
     }
 
-    private static void merge(Comparable[] inputArray, Comparable[] auxillaryArray, int min, int mid, int max) {
+    private static void sort(Integer[] inputArray, Integer[] auxillaryArray, int min, int max) {
+        if (max <= min) {
+            return;
+        }
+        int mid = min + (max - min) / 2;
+        sort(inputArray, auxillaryArray, min, mid);
+        sort(inputArray, auxillaryArray, mid + 1, max);
+        merge(inputArray, auxillaryArray, min, mid, max);
+    }
+
+    private static void merge(Integer[] inputArray, Integer[] auxillaryArray, int min, int mid, int max) {
         // merge method
         // requisite: subarrays are sorted
         // assert isSorted(inputArray, min, mid);
@@ -34,11 +45,9 @@ public class Merge {
             } else if (subarrayTwoIndex > max) {
                 inputArray[arrayIndex] = auxillaryArray[subarrayOneIndex++];
             } else if (isLessThan(auxillaryArray[subarrayTwoIndex], auxillaryArray[subarrayOneIndex])) {
-                System.out.println(auxillaryArray[subarrayOneIndex]);
+
                 inputArray[arrayIndex] = auxillaryArray[subarrayOneIndex++];
-                System.out.println("Changed to:");
-                System.out.println(auxillaryArray[subarrayOneIndex]);
-                System.out.println();
+
             } else {
                 inputArray[arrayIndex] = auxillaryArray[subarrayOneIndex++];
             }
@@ -48,27 +57,18 @@ public class Merge {
 
     }
 
-    private static void sort(Comparable[] inputArray, Comparable[] auxillaryArray, int min, int max) {
-        if (max <= min) {
-            return;
-        }
-        int mid = min + (max - min) / 2;
-        sort(inputArray, auxillaryArray, min, mid);
-        sort(inputArray, auxillaryArray, mid + 1, max);
-        merge(inputArray, auxillaryArray, min, mid, max);
-    }
-
     // is leftcomparable less than rightcomparable
-    private static boolean isLessThan(Comparable left, Comparable right) {
-        return left.compareTo(right) < 0;
+    private static boolean isLessThan(Integer left, Integer right) {
+        boolean check = left.compareTo(right) < 0;
+        return check;
     }
 
     // check if array is sorted
-    private static boolean isSorted(Comparable[] myArray) {
+    private static boolean isSorted(Integer[] myArray) {
         return isSorted(myArray, 0, myArray.length - 1);
     }
 
-    private static boolean isSorted(Comparable[] myArray, int min, int max) {
+    private static boolean isSorted(Integer[] myArray, int min, int max) {
         for (int index = min; index < max; index++) {
             if (isLessThan(myArray[index + 1], myArray[index])) {
                 return false;
