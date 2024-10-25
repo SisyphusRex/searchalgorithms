@@ -41,6 +41,7 @@ public class Program {
             System.out.println();
         }
 
+        // Merge.sort(integerArray);
         Merge.sort(integerArray);
         System.out.println("MergeSorted: ");
         System.out.println(Arrays.toString(integerArray));

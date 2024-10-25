@@ -9,27 +9,7 @@ public class Merge {
     private Merge() {
     }
 
-    public static void sort(Integer[] inputArray) {
-        Integer[] auxillaryArray = new Integer[inputArray.length];
-        sort(inputArray, auxillaryArray, 0, inputArray.length - 1);
-
-    }
-
-    private static void sort(Integer[] inputArray, Integer[] auxillaryArray, int min, int max) {
-        if (max <= min) {
-            return;
-        }
-        int mid = min + (max - min) / 2;
-        sort(inputArray, auxillaryArray, min, mid);
-        sort(inputArray, auxillaryArray, mid + 1, max);
-        merge(inputArray, auxillaryArray, min, mid, max);
-    }
-
     private static void merge(Integer[] inputArray, Integer[] auxillaryArray, int min, int mid, int max) {
-        // merge method
-        // requisite: subarrays are sorted
-        // assert isSorted(inputArray, min, mid);
-        // assert isSorted(inputArray, mid + 2, max);
 
         // copy inputArray to auxillaryArray
         for (int arrayIndex = min; arrayIndex <= max; arrayIndex++) {
@@ -46,7 +26,7 @@ public class Merge {
                 inputArray[arrayIndex] = auxillaryArray[subarrayOneIndex++];
             } else if (isLessThan(auxillaryArray[subarrayTwoIndex], auxillaryArray[subarrayOneIndex])) {
 
-                inputArray[arrayIndex] = auxillaryArray[subarrayOneIndex++];
+                inputArray[arrayIndex] = auxillaryArray[subarrayTwoIndex++];
 
             } else {
                 inputArray[arrayIndex] = auxillaryArray[subarrayOneIndex++];
@@ -55,6 +35,22 @@ public class Merge {
         // post condition
         // assert isSorted(inputArray, min, max);
 
+    }
+
+    public static void sort(Integer[] inputArray) {
+        Integer[] auxillaryArray = new Integer[inputArray.length];
+        sort(inputArray, auxillaryArray, 0, inputArray.length - 1);
+
+    }
+
+    private static void sort(Integer[] inputArray, Integer[] auxillaryArray, int min, int max) {
+        if (max <= min) {
+            return;
+        }
+        int mid = min + (max - min) / 2;
+        sort(inputArray, auxillaryArray, min, mid);
+        sort(inputArray, auxillaryArray, mid + 1, max);
+        merge(inputArray, auxillaryArray, min, mid, max);
     }
 
     // is leftcomparable less than rightcomparable
